@@ -47,7 +47,7 @@ export class EmployeeDetailsComponent implements OnInit {
     this.employeeService.get(id)
       .subscribe({
         next: (data) => {
-          this.currentEmployee = data;
+          this.currentEmployee = data; 
           console.log(data);
           this.initEmployeeFromForEdit();
         } 
@@ -55,7 +55,7 @@ export class EmployeeDetailsComponent implements OnInit {
   }
   initEmployeeFromForEdit(){
     this.EmployeeListForm = this.fb.group({
-      fullname: [this.currentEmployee.fullName!.toString(),Validators.required],
+      fullName: [this.currentEmployee.fullName!.toString(),Validators.required],
       company: [this.currentEmployee.company,Validators.required],
       dob: [formatDate(this.currentEmployee.dob!.toString(), 'yyyy-MM-dd', 'en'),Validators.required],
       gender: [String(this.currentEmployee.gender),Validators.required],
