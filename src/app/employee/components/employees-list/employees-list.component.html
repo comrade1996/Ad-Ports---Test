@@ -1,0 +1,60 @@
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+      <select [(ngModel)]="selectedAttribute" > 
+        <option *ngIf="!selectedAttribute" value="">Filters</option>
+        <option *ngFor="let filter of filters">{{filter}}</option>
+    </select>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by attribute"
+        [(ngModel)]="searchbarData"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          (click)="searchByAttribute()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h4>Employees List</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let employee of employees! | paginate
+        : {
+            itemsPerPage: itemsPerPage,
+            currentPage: page,
+            totalItems: totalItems
+          };
+    let i = index "
+        [class.active]="i == currentIndex"
+        (click)="setActiveEmployee(employee, i)"
+      >
+        {{ employee.fullName }}
+      </li>
+    </ul>
+  <div class="d-flex justify-content-center mt-4">
+    <input type="number" placeholder="Page Size" min="1" max="1000" [(ngModel)]="itemsSize"  class=" w-50 h-25">
+    <pagination-controls
+      previousLabel="Prev"
+      nextLabel="Next"
+      (pageChange)="getPage($event)"
+    >
+    </pagination-controls>
+  </div>
+     
+  </div>
+  <div class="col-md-6">
+    <app-employee-details
+      [viewMode]="true"
+      [currentEmployee]="currentEmployee"
+    ></app-employee-details>
+  </div>
+</div>

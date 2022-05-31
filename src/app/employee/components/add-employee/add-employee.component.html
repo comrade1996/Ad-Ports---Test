@@ -1,0 +1,109 @@
+<div>
+  <div class="submit-form">
+    <form [formGroup]="EmployeeListForm" *ngIf="!submitted">
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="fullName"
+          formControlName="fullName"
+          name="fullName"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="position">Position</label>
+        <input
+          class="form-control"
+          id="position"   
+          formControlName="position"
+          name="position"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="company">Company</label>
+        <input
+          class="form-control"
+          id="company"   
+          formControlName="company"
+          name="company"
+        />
+      </div>
+
+
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input
+          class="form-control"
+          id="phone"   
+          formControlName="phone"
+          name="phone"
+          type="tel"
+          inputmode="tel"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          class="form-control"
+          id="email"   
+          formControlName="email"
+          name="email"
+          type="email"
+          inputmode="email"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="description">gender</label>
+        <div class="d-flex">
+        <label class="mx-2">
+          <input
+            class="form-control"
+            id="gender"   
+            formControlName="gender"
+            name="gender"
+            type="radio"
+            value="false"
+          />
+          <span>Female</span>
+        </label>
+
+        <label>
+          <input
+            class="form-control"
+            id="gender"   
+            formControlName="gender"
+            name="gender"
+            type="radio"
+            value="true"
+          />
+          <span>Male</span>
+        </label>
+      </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Date Of Birth</label>
+        <input
+          class="form-control"
+          id="dob"   
+          formControlName="dob"
+          name="dob"
+          type="date"
+        />
+      </div>
+
+      <button (click)="saveEmployee()" [disabled]="!EmployeeListForm.valid" class="btn btn-success">Submit</button>
+      <!-- {{EmployeeListForm.value | json}}  -->
+    </form>
+
+    <div *ngIf="submitted">
+      <h4>Employee was submitted successfully!</h4>
+      <button class="btn btn-success" (click)="newEmployee()">Add</button>
+    </div>
+  </div>
+</div>

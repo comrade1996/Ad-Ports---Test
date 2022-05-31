@@ -1,0 +1,182 @@
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentEmployee.id">
+    <h4>Employee</h4>
+    <div>
+      <label><strong>Id:</strong></label>
+      {{ currentEmployee.id }}
+    </div>
+
+    <div>
+      <label><strong>fullName:</strong></label> {{ currentEmployee.fullName }}
+    </div>
+    <div>
+      <label><strong>Company:</strong></label>
+      {{ currentEmployee.company }}
+    </div>
+    <div>
+      <label><strong>Gender:</strong></label>
+      {{ currentEmployee.gender  | gender | titlecase}}
+    </div>
+    <div>
+      <label><strong>Phone:</strong></label>
+      {{ currentEmployee.phone }}
+    </div>
+
+    <div>
+      <label><strong>Email:</strong></label>
+      {{ currentEmployee.email }}
+    </div>
+
+    <div>
+      <label><strong>Position:</strong></label>
+      {{ currentEmployee.position }}
+    </div>
+
+    <div>
+      <label><strong>Dob:</strong></label>
+      {{ currentEmployee.dob }}
+    </div>
+
+   
+    <a
+      class="badge badge-warning"
+      routerLink="/employees/employees/{{ currentEmployee.id }}"
+    >
+      Edit
+    </a>
+  </div>
+
+  <div *ngIf="!currentEmployee">
+    <br />
+    <p>Please click on a Employee...</p>
+  </div>
+</div>
+
+<ng-template #editable>
+  <div *ngIf="currentEmployee.id" class="edit-form">
+    <h4>Employee</h4>
+    <form [formGroup]="EmployeeListForm"  >
+      <div class="form-group">
+       
+      </div>
+
+      
+      <div class="form-group">
+        <label for="fullname">Full Name</label>
+        <input
+          class="form-control"
+          id="fullname"   
+          formControlName="fullname"
+          name="fullname"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="position">Position</label>
+        <input
+          class="form-control"
+          id="position"   
+          formControlName="position"
+          name="position"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="company">Company</label>
+        <input
+          class="form-control"
+          id="company"   
+          formControlName="company"
+          name="company"
+        />
+      </div>
+
+
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input
+          class="form-control"
+          id="phone"   
+          formControlName="phone"
+          name="phone"
+          type="tel"
+          inputmode="tel"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          class="form-control"
+          id="email"   
+          formControlName="email"
+          name="email"
+          type="email"
+          inputmode="email"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="description">gender</label>
+        <div class="d-flex">
+        <label class="mx-2">
+          <input
+            class="form-control"
+            id="gender"   
+            formControlName="gender"
+            name="gender"
+            type="radio"
+            value="false"
+          />
+          <span>Female</span>
+        </label>
+
+        <label>
+          <input
+            class="form-control"
+            id="gender"   
+            formControlName="gender"
+            name="gender"
+            type="radio"
+            value="true"
+          />
+          <span>Male</span>
+        </label>
+      </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Date Of Birth</label>
+        <input
+          class="form-control"
+          id="dob"   
+          formControlName="dob"
+          name="dob"
+          type="date"
+        />
+      </div>
+  
+    </form>
+
+ 
+
+    <button class="badge badge-danger mr-2" (click)="deleteEmployee()">
+      Delete
+    </button>
+
+    <button
+      type="submit"
+      [disabled]="!EmployeeListForm.valid"
+      class="badge badge-success mb-2"
+      (click)="updateEmployee()"
+    >
+      Update
+    </button>
+    <p>{{ EmployeeListForm.value|json }}</p>
+  </div>
+
+  <div *ngIf="!currentEmployee.id">
+    <br />
+    <p>Cannot access this Employee...</p>
+  </div>
+</ng-template>
